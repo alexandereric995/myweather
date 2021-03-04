@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/Map" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<head>
+    <meta charset="utf-8"/>
+    <title>BUMI</title>
+<link rel="icon" href="https://i.pinimg.com/originals/4d/9c/0e/4d9c0ed6cd956fcc36112dd2ee276359.png"/>
+    <meta itemprop="name" content="Bumi"/>
+    <meta itemprop="description" name="description" content="Malaysia system to show weather around globe"/>
+    <meta itemprop="author" name="author" content="Alexander Eric@Eric Lapin"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="MALAYSIA WEATHER"/>
+    <meta property="og:description" content="Malaysia system to show weather around globe"/>
+   
+    <link rel="stylesheet" type="text/css" href="/styles/styles.css"/>
+</head>
+<body data-lang="lang">
+<p id="warn"><ahref="https://alexandereric995.github.io/myorbit/"><img src="https://static.wixstatic.com/media/edc28b_0539ee9605b647b99acc3ab2110a0400~mv2.gif" width="90" height="70"/></a></p>
+
+    <div id="display">
+        <svg id="map" class="fill-screen" xmlns="http://www.w3.org/2000/svg" version="1.1"></svg>
+        <canvas id="animation" class="fill-screen"></canvas>
+        <canvas id="overlay" class="fill-screen"></canvas>
+        <svg id="foreground" class="fill-screen" xmlns="http://www.w3.org/2000/svg" version="1.1"></svg>
+    </div>
+
+    <div id="details">
+        <p id="status"></p>
+        <div id="location">
+            <p>
+                <span id="location-coord"></span>
+                <span id="location-close" class="invisible text-button"> ✕ </span>
+            </p>
+            <p>
+                <span id="location-wind"></span>
+                <span id="location-wind-units" class="text-button"></span>
+            </p>
+            <p>
+                <span id="location-value"></span>
+                <span id="location-value-units" class="text-button"></span>
+            </p>
+        </div>
+
+        <p id="earth">
+            <span id="show-menu" class="text-button" title="menu"><img src="./icon.png" width="50" height="50"/><font color="#ffe066"> WEATHER </font></span>
+            <span id="progress" class="invisible"></span>
+        </p>
+
+        <div id="menu" class="invisible">
+            <p> DATE  <span>
+<script>
+        zeroPadding(cd.getMinutes(), 2) +
+        ":" +
+        zeroPadding(cd.getSeconds(), 2);
+    clock.date =
+        zeroPadding(cd.getFullYear(), 4) +
+        "-" +
+        zeroPadding(cd.getMonth() + 1, 2) +
+        "-" +
+        zeroPadding(cd.getDate(), 2) +
+        " " +
+        week[cd.getDay()];
+}
+
+function zeroPadding(num, digit) {
+    var zero = "";
+    for (var i = 0; i < digit; i++) {
+        zero += "0";
+    }
+    return (zero + num).slice(-digit);
+}
+
+</script>
+<script type="text/javascript">
+function startTime()
+{
+var today=new Date()
+var h=today.getHours()
+var m=today.getMinutes()
+var s=today.getSeconds()
+
+
+//to add a zero in front of numbers<10
+
+m=checkTime(m)
+s=checkTime(s)
+
+document.getElementById('clock').innerHTML=h+":"+m+":"+s
+t=setTimeout('startTime()', 500)
+}
+
+function checkTime(i)
+{
+if (i<10)
+{ i="0" + i}
+return i
+}
+
+window.onload=startTime;
+
+</script>
+<div>
+                <p id="date" class="local"></span><div id="clock" align='center' style="font-size:35px;color:white;text-shadow:2px 2px 2px blue;
+border:3px; width:180px; height:40px"><span>
+</p></div>
+                <p><p id="toggle-zone" class="text-button"></span></p>
+            <p> DATA  <span id="data-layer"></span></p>
+            <p><span id="scale-label"> SCALE </span><canvas id="scale"></canvas></p>
+            <p> DATASOURCE  <span id="data-center"></span></p>
+            <p> CONTROL <span
+                class="text-button" id="nav-now" title="Current Conditions"> [Allocate] </span><span
+                class="text-button" id="nav-backward-more"> « </span>  <span
+                class="text-button" id="nav-backward"> ‹ </span>  <span
+                class="text-button" id="nav-forward"> › </span>  <span
+                class="text-button" id="nav-forward-more"> » </span><span
+                class="text-button" id="show-location" title="Current Position"><img src="https://media4.giphy.com/media/QONXjFYXGcOgOAWFeb/giphy.gif" width="40" height="40"/></span><span
+                class="text-button" id="option-show-grid" title="Toggle Grid"> Grid </span>
+            </p>
+            <p> MODE  <span
+                class="text-button" id="wind-mode-enable"> Air </span> – <span
+                class="text-button" id="ocean-mode-enable"> Ocean </span>
+            </p>
+            <p class="wind-mode"> HEIGHT  <span
+                class="surface text-button" id="surface-level" title="Surface"> Sfc </span> – <span
+                class="surface text-button" id="isobaric-1000hPa">1000</span> – <span
+                class="surface text-button" id="isobaric-850hPa">850</span> – <span
+                class="surface text-button" id="isobaric-700hPa">700</span> – <span
+                class="surface text-button" id="isobaric-500hPa">500</span> – <span
+                class="surface text-button" id="isobaric-250hPa">250</span> – <span
+                class="surface text-button" id="isobaric-70hPa">70</span> – <span
+                class="surface text-button" id="isobaric-10hPa">10</span> hPa
+            </p>
+            <p class="wind-mode"> Overlay  <span
+                class="text-button" id="overlay-off"> none </span> – <span
+                class="text-button" id="overlay-wind" title="wind Speed"> wind </span> – <span
+                class="text-button" id="overlay-temp" title="Temperature"> Temp </span> – <span
+                class="text-button" id="overlay-relative_humidity" title=" 'Relative Humidity "> RH </span> – <span
+                class="text-button" id="overlay-air_density" title="Air Density"> AD </span> – <span
+                class="text-button" id="overlay-wind_power_density" title="wind Power Density"> WPD </span>
+            </p>
+            <p class="wind-mode"><span style="visibility:hidden"> Overlay </span> <span
+                class="text-button" id="overlay-total_precipitable_water" title="Total Precipitable Water"> TPW </span> – <span
+                class="text-button" id="overlay-total_cloud_water" title="Total Cloud Water"> TCW </span> – <span
+                class="text-button" id="overlay-mean_sea_level_pressure" title="Mean Sea Level Pressure"> MSLP </span>
+            </p>
+            <p class="ocean-mode invisible"> ANIMATE  <span
+                class="text-button" id="animate-currents" title="Currents">Currents </span>
+            </p>
+            <p class="ocean-mode invisible"> OVERLAY  <span
+                class="text-button" id="overlay-ocean-off"> none </span> – <span
+                class="text-button" id="overlay-currents" title="Currents">Currents</span>
+            </p>
+            <p class="ocean-mode invisible"><span style="visibility:hidden">OVERLAY</span> </p>
+            <p> PROJECTION <span
+                class="proj text-button" id="atlantis" title="Atlantis">A</span> – <span
+                class="proj text-button" id="azimuthal_equidistant" title="Azimuthal Equidistant">AE</span> – <span
+                class="proj text-button" id="conic_equidistant" title="Conic Equidistant">CE</span> – <span
+                class="proj text-button" id="equirectangular" title="Equirectangular">E</span> – <span
+                class="proj text-button" id="orthographic" title="Orthographic">O</span> – <span
+                class="proj text-button" id="stereographic" title="Stereographic">S</span> – <span
+                class="proj text-button" id="waterman" title="Waterman Butterfly">WB</span> – <span
+                class="proj text-button" id="winkel3" title="Winkel Tripel">WT</span>
+            </p>
+            <p id="lang"><a href="https://www.malaysia.gov.my/portal/" class="internal-link"><img src="https://i.pinimg.com/originals/4d/9c/0e/4d9c0ed6cd956fcc36112dd2ee276359.png" height="40" width="40"/> </a></p>
+            <p>
+<a href="/about.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Logo_informations.svg/768px-Logo_informations.svg.png" height="40" width="40"/><font color="#b3d9ff"> ABOUT </font></a>               
+            </p>
+        </div>
+    </div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js" charset="utf-8"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js" charset="utf-8"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.1.0/topojson.min.js" charset="utf-8"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.10/d3.min.js" charset="utf-8"></script>
+
+<!--
+    <script src="/libs/underscore.js/1.6.0/underscore.js" charset="utf-8"></script>
+    <script src="/libs/backbone.js/1.1.0/backbone.js" charset="utf-8"></script>
+    <script src="/libs/topojson/1.1.0/topojson.js" charset="utf-8"></script>
+    <script src="/libs/d3/3.3.10/d3.js" charset="utf-8"></script>
+-->
+
+    <script src="/libs/d3.geo/0.0.0/d3.geo.projection.v0.min.js" charset="utf-8"></script>
+    <script src="/libs/d3.geo/0.0.0/d3.geo.polyhedron.v0.min.js" charset="utf-8"></script>
+    <script src="/libs/when/2.6.0/when.js" charset="utf-8"></script>
+
+    <script src="/libs/earth/1.0.0/micro.js" charset="utf-8"></script>
+    <script src="/libs/earth/1.0.0/globes.js" charset="utf-8"></script>
+    <script src="/libs/earth/1.0.0/products.js" charset="utf-8"></script>
+    <script src="/libs/earth/1.0.0/earth.js" charset="utf-8"></script>
+
+</body>
+</html>
