@@ -11,6 +11,21 @@
     <meta property="og:description" content="Malaysia system to show weather around globe"/>
     <link rel="stylesheet" href="/styles/styles.css"/>
     <html itemscope itemtype="http://schema.org/Map" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+         <script>
+        var isNS = (navigator.appName == "Netscape") ? 1 : 0;
+        if (navigator.appName == "Netscape") document.captureEvents(Event.MOUSEDOWN || Event.MOUSEUP);
+        function mischandler() {
+            return false;
+        }
+        function mousehandler(e) {
+            var myevent = (isNS) ? e : event;
+            var eventbutton = (isNS) ? myevent.which : myevent.button;
+            if ((eventbutton == 2) || (eventbutton == 3)) return false;
+        }
+        document.oncontextmenu = mischandler;
+        document.onmousedown = mousehandler;
+        document.onmouseup = mousehandler;
+    </script>
 </head>
 <body data-lang="lang">
 <p id="warn"><ahref="https://alexandereric995.github.io/myorbit/"><img src="https://static.wixstatic.com/media/edc28b_0539ee9605b647b99acc3ab2110a0400~mv2.gif" width="90" height="70"/></a></p>
