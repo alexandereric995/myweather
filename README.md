@@ -45,4 +45,7 @@
    
  Click here to [DEMO](https://alexandereric995.github.io/myweather/)
    
+   PREVIEW:
+   ![MYWEATHER](https://alexandereric995.github.io/myweather/myweather.png)
+Format: ![Alt Text](url)
    	
