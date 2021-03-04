@@ -47,5 +47,6 @@
    
    PREVIEW:
    ![MYWEATHER](https://alexandereric995.github.io/myweather/myweather.png)
-Format: ![Above is the preview of the my weather after publish at my own server.]
+   
+   	[Above is the preview of the my weather after publish at my own server.
    	
